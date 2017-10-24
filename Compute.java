@@ -1,6 +1,9 @@
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Vector;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 public class Compute {
 
@@ -74,12 +77,36 @@ public class Compute {
         }
     }
 
-    static void computeBarcode(int[][] M, Vector<Simplex> F){
+    static void computeBarcode(int[][] M, Vector<Simplex> F) throws IOException{
+        FileWriter fw = new FileWriter("out.txt");
+        BufferedWriter bw = new BufferedWriter(fw);
+        
+        
+
         for (int i = 0; i < pivots.length; i++) {
-            if(pivots[i] >= 0){
-                System.out.println(F.get(i)+"    "+F.get(pivots[i]));
+            if(pivots[i] >= 0){ //si il existe un pivot Bij on a l'interval [i,j)
+                bw.write(F.get(pivots[i]).dim + " " + F.get(pivots[i]).val + " " + F.get(i).val);
+                bw.newLine();
+                System.out.println("dimension : " + F.get(pivots[i]).dim + "  interval [" + F.get(pivots[i]).val + ", " + F.get(i).val + ")");
+            }
+            if(pivots[i] == -1){ //si pas de pivot alors colonne vide
+                boolean iInPivots = false;  //on regarde si il y a un pivot sur la ligne i
+                for(int p : pivots){
+                    if(p == i){
+                        iInPivots = true;
+                        break;
+                    }
+                }
+                if(!iInPivots){     //si pas de pivot sur la ligne i alors on a l'intervale [i, inf)
+                    bw.write(F.get(i).dim + " " + F.get(i).val + " inf");
+                    bw.newLine();
+                    System.out.println("dimension : " + F.get(i).dim + "  interval [" + F.get(i).val + ", inf)");
+                }
+                
             }
         }
+        bw.close();
+        fw.close();
     }
 
     static void printMatrix(int[][] M){

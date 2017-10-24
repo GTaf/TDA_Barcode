@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.TreeSet;
@@ -39,7 +40,7 @@ public class ReadFiltration {
 		return F;
 	}
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws FileNotFoundException, IOException {
 		if (args.length != 1) {
 			System.out.println("Syntax: java ReadFiltration <filename>");
 			System.exit(0);
@@ -55,7 +56,8 @@ public class ReadFiltration {
       Compute.reduction(M);
 			Compute.printMatrix(M);
 			System.out.println("Barcode : ");
-      Compute.computeBarcode(M,F);
+			Compute.computeBarcode(M,F);
+			
     }
 
 }
