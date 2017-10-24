@@ -46,13 +46,16 @@ public class ReadFiltration {
 		}
 
 		Vector<Simplex> F = readFiltration(args[0]);
+		System.out.println("Filtration : ");
 		System.out.println(F);
 		int[][] M = Compute.computeMatrix(F);
-        Compute.printMatrix(M);
-        System.out.println();
-        Compute.reduction(M);
-        Compute.printMatrix(M);
-        Compute.computeBarcode(M,F);
+			System.out.println("Matrice : ");
+      Compute.printMatrix(M);
+      System.out.println("Reduction :");
+      Compute.reduction(M);
+			Compute.printMatrix(M);
+			System.out.println("Barcode : ");
+      Compute.computeBarcode(M,F);
     }
 
 }
