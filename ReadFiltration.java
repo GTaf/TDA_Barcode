@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.TreeSet;
@@ -29,7 +30,7 @@ class Simplex {
 
 public class ReadFiltration {
 
-	static Vector<Simplex> readFiltration (String filename) throws FileNotFoundException {
+	static Vector<Simplex> readFiltration (String filename) throws FileNotFoundException{
 		Vector<Simplex> F = new Vector<Simplex>();
 		Scanner sc = new Scanner(new File(filename));
 		sc.useLocale(Locale.US);
@@ -39,20 +40,24 @@ public class ReadFiltration {
 		return F;
 	}
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws FileNotFoundException, IOException {
 		if (args.length != 1) {
 			System.out.println("Syntax: java ReadFiltration <filename>");
 			System.exit(0);
 		}
 
 		Vector<Simplex> F = readFiltration(args[0]);
+		System.out.println("Filtration : ");
 		System.out.println(F);
 		int[][] M = Compute.computeMatrix(F);
-        Compute.printMatrix(M);
-        System.out.println();
-        Compute.reduction(M);
-        Compute.printMatrix(M);
-        Compute.computeBarcode(M,F);
+			System.out.println("Matrice : ");
+      Compute.printMatrix(M);
+      System.out.println("Reduction :");
+      Compute.reduction(M);
+			Compute.printMatrix(M);
+			System.out.println("Barcode : ");
+			Compute.computeBarcode(M,F);
+			
     }
 
 }
