@@ -30,7 +30,7 @@ class Simplex {
 
 public class ReadFiltration {
 
-	static Vector<Simplex> readFiltration (String filename) throws FileNotFoundException {
+	static Vector<Simplex> readFiltration (String filename) throws FileNotFoundException{
 		Vector<Simplex> F = new Vector<Simplex>();
 		Scanner sc = new Scanner(new File(filename));
 		sc.useLocale(Locale.US);
