@@ -40,23 +40,33 @@ public class ReadFiltration {
 		return F;
 	}
 
-	public static void main(String[] args) throws FileNotFoundException, IOException {
-		if (args.length != 1) {
-			System.out.println("Syntax: java ReadFiltration <filename>");
-			System.exit(0);
-		}
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+        if (args.length != 1) {
+            System.out.println("Syntax: java ReadFiltration <filename>");
+            System.exit(0);
+        }
 
-		Vector<Simplex> F = readFiltration(args[0]);
-		System.out.println("Filtration : ");
-		System.out.println(F);
-		int[][] M = Compute.computeMatrix(F);
-			System.out.println("Matrice : ");
-      Compute.printMatrix(M);
-      System.out.println("Reduction :");
-      Compute.reduction(M);
-			Compute.printMatrix(M);
-			System.out.println("Barcode : ");
-			Compute.computeBarcode(M,F);
+        Vector<Simplex> F = readFiltration(args[0]);
+
+        System.out.println("Filtration : ");
+        System.out.println(F);
+        SparseMatrix M = Sparse_Compute.computeMatrix(F);
+        int[][] Mp = Compute.computeMatrix(F);
+
+        System.out.println("Matrice : ");
+        Sparse_Compute.printMatrix(M);
+        //System.out.println();
+        //Compute.printMatrix(Mp);
+
+        System.out.println("Reduction :");
+        //Compute.reduction(Mp);
+        //Compute.printMatrix(Mp);
+        //System.out.println();
+        Sparse_Compute.reduction(M);
+        Sparse_Compute.printMatrix(M);
+
+        System.out.println("Barcode : ");
+        Sparse_Compute.computeBarcode(M,F);
 			
     }
 
