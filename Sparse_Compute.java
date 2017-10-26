@@ -1,13 +1,11 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Vector;
+import java.util.*;
 
 public class Sparse_Compute {
-    static int[] pivots;
-    static int size;
+    private static int[] pivots;
+    private static int size;
 
     static SparseMatrix computeMatrix(Vector<Simplex> F){
         F.sort(new Comparator<Simplex>() {
@@ -16,27 +14,34 @@ public class Sparse_Compute {
                 return Float.compare(simplex.val, t1.val);
             }
         });
+        HashMap<Integer, LinkedList<Integer>> h = new HashMap<>();
 
         for (int i = 0; i < F.size(); i++) {
             F.get(i).id = i;
+            if(h.get(F.get(i).vert.get(0)) == null) h.put(F.get(i).vert.get(0), new LinkedList<Integer>());
+            h.get(F.get(i).vert.get(0)).add(i);
         }
-        System.out.println("coucou");
+        System.out.println("Taille de F : "+F.size());
         size = F.size();
         SparseMatrix res = new SparseMatrix();
         for (int i = 0; i < F.size(); i++) {//on parcours les colonnes une à une
+
             Simplex s = F.get(i);
             if(s.dim > 0){//On ne regarde pas les points
-                for (int j = 0; j < F.size(); j++) {// on cherhce tous les ommets possibles
-                    if(F.get(j).dim == s.dim-1){// si bonne taille
+
+                System.out.println("Colonne : "+i+"/"+size+"  dim : "+s.dim           );
+                for (int l = 0; l < h.get(s.vert.get(0)).size(); l++) {// on cherhce tous les ommets possibles
+                    //System.out.println("        sommet : "+l+"/"+size);
+                    int j = h.get(s.vert.get(0)).get(l);
                         boolean in = true;
                         for (int k = 0; k < F.get(j).vert.size(); k++) {
-                            if(!s.vert.contains(F.get(j).vert.get(k))){
+                            if(s.vert.contains(F.get(j).vert.get(k)) ){
                                 in = false;
+
                             }
                         }
 
                         if(in) res.add(F.get(j).id, i);
-                    }
                 }
             }
         }
@@ -48,7 +53,7 @@ public class Sparse_Compute {
         Arrays.fill(pivots, -1);
         for (int j = 0; j < size; j++) {//pour chaque colonne
             int pivot = -1;
-            boolean avant = false;
+            boolean avant;
             for (int i = 0; i < size; i++) {
                 if(M.contains(i,j))
                     pivot = i;
