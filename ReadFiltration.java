@@ -18,8 +18,11 @@ class Simplex {
 		val = sc.nextFloat();
 		dim = sc.nextInt();
 		vert = new Vector<Integer>();
-		for (int i=0; i<=dim; i++)
-			vert.add(sc.nextInt());
+
+		for (int i=0; i<=dim; i++){
+            vert.add(sc.nextInt());
+        }
+
 	}
 
 	public String toString(){
@@ -49,12 +52,12 @@ public class ReadFiltration {
         Vector<Simplex> F = readFiltration(args[0]);
 
         System.out.println("Filtration : ");
-        System.out.println(F);
+        //System.out.println(F);
         SparseMatrix M = Sparse_Compute.computeMatrix(F);
-        int[][] Mp = Compute.computeMatrix(F);
+        //int[][] Mp = Compute.computeMatrix(F);
 
         System.out.println("Matrice : ");
-        Sparse_Compute.printMatrix(M);
+        //Sparse_Compute.printMatrix(M);
         //System.out.println();
         //Compute.printMatrix(Mp);
 
