@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -30,6 +31,16 @@ public class SparseMatrix {
     public Boolean contains(int i, int j){
         return (rowColumn.get(i)!=null && rowColumn.get(i).contains(j));
     }
+    public Boolean containsColumn(int j) {
+        if(columnRaw.get(j) == null) return false;
+        if(columnRaw.get(j).size() == 0) return false;
+        return true;}
+    public int maxColumn(int j){
+        return Collections.max(columnRaw.get(j));
+    }
+    public int minLine(int i){return Collections.min(rowColumn.get(i));}
+    public LinkedList<Integer> getRow(int i){return rowColumn.get(i);}
+
 
     public void add(int i, int j, int ip, int jp){//ajoute [ip,jp] a [i,j]
         if (this.contains(ip,jp)){

@@ -58,15 +58,15 @@ public class ReadFiltration {
 
         System.out.println("Matrice : ");
         //Sparse_Compute.printMatrix(M);
-        //System.out.println();
+        System.out.println();
         //Compute.printMatrix(Mp);
 
         System.out.println("Reduction :");
         //Compute.reduction(Mp);
         //Compute.printMatrix(Mp);
-        //System.out.println();
+        System.out.println();
         Sparse_Compute.reduction(M);
-        Sparse_Compute.printMatrix(M);
+        //Sparse_Compute.printMatrix(M);
 
         System.out.println("Barcode : ");
         Sparse_Compute.computeBarcode(M,F);

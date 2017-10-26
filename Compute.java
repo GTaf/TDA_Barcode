@@ -34,7 +34,7 @@ public class Compute {
                             }
                         }
 
-                        if(in) res[F.get(j).id][i] = 1;
+                        if(in) res[j][i] = 1;
                     }
                 }
             }
