@@ -42,7 +42,7 @@ public class Sparse_Compute {
 
             Simplex s = F.get(i);
             if(s.dim > 0){//On ne regarde pas les points
-                System.out.println("Simplex : "+s.val+"      vertices"+s.vert);
+                //System.out.println("Simplex : "+s.val+"      vertices"+s.vert);
                 Iterator<Integer> it = g.get(i).iterator();
                 while(it.hasNext()) {// on cherhce tous les ommets possibles
                     int j = it.next();//j indice d'un autre simplex
@@ -74,8 +74,10 @@ public class Sparse_Compute {
 
             LinkedList<Integer> l = M.getRow(pivots[j]);
             while (l.size() != 1) {//recherche nb avant
+                
                 int k = l.peekLast();//enleve dernier élèment
                 if(k == j){//cherche un autre pivot sur la ligne
+                    k = l.pollLast();
                     l.push(k);
                     continue;
                 }
