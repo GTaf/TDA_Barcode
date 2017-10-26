@@ -53,6 +53,7 @@ public class ReadFiltration {
 
         System.out.println("Filtration : ");
         //System.out.println(F);
+        
         SparseMatrix M = Sparse_Compute.computeMatrix(F);
         //int[][] Mp = Compute.computeMatrix(F);
 

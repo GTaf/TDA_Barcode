@@ -57,7 +57,6 @@ public class Compute {
             do{
                 avant = false;
 
-                //System.out.println("pivot : " + pivot);
                 if(pivot != -1){//si on a un pivot
                     for (int k = 0; k < M.length; k++) {//recherche nb avant
                         if(k!= j && M[pivot][k] != 0){//cherche un autre pivot sur la ligne
@@ -68,7 +67,6 @@ public class Compute {
                             avant = true;//on a eu un pivot avant
 
                         }
-                        //System.out.println(pivot+"         "+k);
                     }
 
                 }
@@ -80,14 +78,11 @@ public class Compute {
     static void computeBarcode(int[][] M, Vector<Simplex> F) throws IOException{
         FileWriter fw = new FileWriter("out.txt");
         BufferedWriter bw = new BufferedWriter(fw);
-        
-        
 
         for (int i = 0; i < pivots.length; i++) {
             if(pivots[i] >= 0){ //si il existe un pivot Bij on a l'interval [i,j)
                 bw.write(F.get(pivots[i]).dim + " " + F.get(pivots[i]).val + " " + F.get(i).val);
                 bw.newLine();
-                System.out.println("dimension : " + F.get(pivots[i]).dim + "  interval [" + F.get(pivots[i]).val + ", " + F.get(i).val + ")");
             }
             if(pivots[i] == -1){ //si pas de pivot alors colonne vide
                 boolean iInPivots = false;  //on regarde si il y a un pivot sur la ligne i
@@ -100,7 +95,6 @@ public class Compute {
                 if(!iInPivots){     //si pas de pivot sur la ligne i alors on a l'intervale [i, inf)
                     bw.write(F.get(i).dim + " " + F.get(i).val + " inf");
                     bw.newLine();
-                    System.out.println("dimension : " + F.get(i).dim + "  interval [" + F.get(i).val + ", inf)");
                 }
                 
             }
